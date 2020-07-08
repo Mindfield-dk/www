@@ -1,0 +1,21 @@
+version: '3.4'
+services:
+  devserver:
+    container_name: mindfield_dev_server
+    build:
+      context: ./
+    command: ["npm", "run", "serve"]
+    working_dir: /tmp/
+    ports:
+      - "80:80"
+      - "8000:8000"
+    volumes:
+        - type: bind
+          source: ./
+          target: /tmp
+    networks:
+      - mindfield
+
+networks:
+  mindfield:
+    driver: bridge
