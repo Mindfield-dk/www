@@ -25,6 +25,6 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: Build
       run: |
-        #npm install
-        #npm run build
-        env
+        npm install
+        npm run build
+        make publish
