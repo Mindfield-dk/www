@@ -7,6 +7,7 @@ REPO=${4:-${GITHUB_REPOSITORY}}
 RUN=${5:-${GITHUB_RUN_NUMBER}}
 
 if [ "${EVENT_NAME}" == "push" ]; then
+  if [ -d ${TARGET_BRANCH} ]; then rm -rf ${TARGET_BRANCH}; fi
   working_dir=$(pwd)
   org_name="$(git config user.email)"
   org_email="$(git config user.name)"
@@ -14,13 +15,13 @@ if [ "${EVENT_NAME}" == "push" ]; then
   git config user.name "Git Actions"
   git clone --quiet --branch=${TARGET_BRANCH} https://${TOKEN}@github.com/${REPO}.git ${TARGET_BRANCH} > /dev/null
   cd ${TARGET_BRANCH}
-  ls -la
-  rm -rf *.*
-  cp -Rf ${working_dir}/dist ./
-  #git add -f .
-  #git commit -m "Github Actions build ${GITHUB_RUN_NUMBER} pushed to master"
-  #git push -fq origin ${TARGET_BRANCH} > /dev/null
+  rm -rf *.* css img js
+  cp -r ${working_dir}/dist/* ./
+  git add -f .
+  git commit -m "Github Actions build ${RUN} deploy"
+  git push -fq origin ${TARGET_BRANCH} > /dev/null
   cd ..
   git config user.email "${org_email}"
   git config user.name "${org_name}"
+  if [ -d ${TARGET_BRANCH} ]; then rm -rf ${TARGET_BRANCH}; fi
 fi
