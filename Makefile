@@ -43,6 +43,5 @@ build:
 
 # Publish weppage
 publish:
-	echo ${GITHUB_EVENT_NAME}
-	echo $(shell git config user.name)
+	@if [ -z "$(git config user.email)" ]; then echo "It is not set"; fi
 #	./publish.sh
