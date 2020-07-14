@@ -43,5 +43,4 @@ build:
 
 # Publish weppage
 publish:
-	@if [ -z "$(git config user.email)" ]; then echo "It is not set"; fi
-#	./publish.sh
+	./publish.sh

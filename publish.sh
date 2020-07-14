@@ -9,8 +9,8 @@ RUN=${5:-${GITHUB_RUN_NUMBER}}
 if [ "${EVENT_NAME}" == "push" ]; then
   if [ -d ${TARGET_BRANCH} ]; then rm -rf ${TARGET_BRANCH}; fi
   working_dir=$(pwd)
-  org_name="$(git config user.email)"
-  org_email="$(git config user.name)"
+  if [ ! -z "$(git config user.email)" ]; then org_name="$(git config user.email)"; fi
+  if [ ! -z "$(git config user.name)" ]; then org_email="$(git config user.name)"; fi
   git config user.email "actions@github.com"
   git config user.name "Git Actions"
   git clone --quiet --branch=${TARGET_BRANCH} https://${TOKEN}@github.com/${REPO}.git ${TARGET_BRANCH} > /dev/null
@@ -21,7 +21,7 @@ if [ "${EVENT_NAME}" == "push" ]; then
   git commit -m "Github Actions build ${RUN} deploy"
   git push -fq origin ${TARGET_BRANCH} > /dev/null
   cd ..
-  git config user.email "${org_email}"
-  git config user.name "${org_name}"
+  if [ ! -z "${org_email}" ]; then git config user.email "${org_email}"; fi
+  if [ ! -z "${org_name}" ];  then git config user.name "${org_name}"; fi
   if [ -d ${TARGET_BRANCH} ]; then rm -rf ${TARGET_BRANCH}; fi
 fi
