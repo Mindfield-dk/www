@@ -43,4 +43,6 @@ build:
 
 # Publish weppage
 publish:
-	./publish.sh
+	echo ${GITHUB_EVENT_NAME}
+	echo $(shell git config user.name)
+#	./publish.sh
