@@ -21,13 +21,13 @@ function publish() {
     echo $(git config user.email)
     echo $(git config user.name)
     git clone --quiet --branch=${TARGET_BRANCH} https://${TOKEN}@github.com/${REPO}.git ${TARGET_BRANCH} > /dev/null
-    #cd ${working_dir}/${TARGET_BRANCH}
-    #find ./* -path ./.git -prune -exec rm -rf {} \;  2>/dev/null
-    #echo "www.mindfield.dk" > ${working_dir}/${TARGET_BRANCH}/CNAME
-    #cp -r ${working_dir}/dist/* ${working_dir}/${TARGET_BRANCH}
-    #git add -f .
-    #git commit -m "Github Actions build ${RUN} deploy"
-    #git push -fq origin ${TARGET_BRANCH} > /dev/null
+    cd ${working_dir}/${TARGET_BRANCH}
+    find ./* -path ./.git -prune -exec rm -rf {} \;  2>/dev/null
+    echo "www.mindfield.dk" > ${working_dir}/${TARGET_BRANCH}/CNAME
+    cp -r ${working_dir}/dist/* ${working_dir}/${TARGET_BRANCH}
+    git add -f .
+    git commit -m "Github Actions build ${RUN} deploy"
+    git push -fq origin ${TARGET_BRANCH} > /dev/null
     if [ ! -z "${org_email}" ]; then git config user.email "${org_email}";  fi
     if [ ! -z "${org_name}" ];  then git config user.name "${org_name}"; fi
     echo ${org_email}
