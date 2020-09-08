@@ -20,7 +20,7 @@ function publish() {
     git config user.name "Git Actions"
     echo $(git config user.email)
     echo $(git config user.name)
-    #git clone --quiet --branch=${TARGET_BRANCH} https://${TOKEN}@github.com/${REPO}.git ${TARGET_BRANCH} > /dev/null
+    git clone --quiet --branch=${TARGET_BRANCH} https://${TOKEN}@github.com/${REPO}.git ${TARGET_BRANCH} > /dev/null
     #cd ${working_dir}/${TARGET_BRANCH}
     #find ./* -path ./.git -prune -exec rm -rf {} \;  2>/dev/null
     #echo "www.mindfield.dk" > ${working_dir}/${TARGET_BRANCH}/CNAME
