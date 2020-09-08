@@ -25,5 +25,11 @@ npm run test:unit
 npm run lint
 ```
 
+## Publish
+
+```
+$ ./publish.sh -e push -r Mindfield-dk/mindfield-dk.github.io -s 10
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

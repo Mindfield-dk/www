@@ -43,4 +43,4 @@ build:
 
 # Publish weppage
 publish:
-	./publish.sh
+	./publish.sh -e push -r Mindfield-dk/mindfield-dk.github.io
