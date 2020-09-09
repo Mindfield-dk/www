@@ -5,6 +5,7 @@ function check(){
   if [ "${TOKEN}" = "" ]; then echo "Must specify TOKEN"; exit 1; fi
   if [ "${REPO}" = "" ]; then echo "Must specify REPO"; exit 1; fi
   if [ "${RUN}" = "" ]; then echo "Must specify RUN"; exit 1; fi
+  if [ "${ACTOR}" = "" ]; then echo "Must specify ACTOR"; exit 1; fi
 }
 
 function publish() {
@@ -14,7 +15,7 @@ function publish() {
     working_dir=$(pwd)
     #--quiet
     # > /dev/null
-    git clone --branch=${TARGET_BRANCH} https://${TOKEN}@github.com/${REPO}.git ${TARGET_BRANCH}
+    git clone --branch=${TARGET_BRANCH} https://${ACTRO}:${TOKEN}@github.com/${REPO}.git ${TARGET_BRANCH}
     cd ${working_dir}/${TARGET_BRANCH}
     if [ ! -z "$(git config user.email)" ]; then org_name="$(git config user.email)"; fi
     if [ ! -z "$(git config user.name)" ]; then org_email="$(git config user.name)"; fi
@@ -47,12 +48,16 @@ EVENT_NAME=${GITHUB_EVENT_NAME}
 TOKEN=${GITHUB_TOKEN}
 REPO=${GITHUB_REPOSITORY}
 RUN=${GITHUB_RUN_NUMBER}
+ACTOR=${GITHUB_ACTOR}
 
-optstring=":hb:e:t:r:s:"
+optstring=":ha:b:e:t:r:s:"
 while getopts ${optstring} arg; do
   case ${arg} in
     h)
       echo "showing usage!"
+      ;;
+    a)
+      if [ "${ACTOR}" = "" ]; then ACTOR=$OPTARG; fi
       ;;
     b)
       if [ "${TARGET_BRANCH}" = "" ]; then TARGET_BRANCH=$OPTARG; fi
