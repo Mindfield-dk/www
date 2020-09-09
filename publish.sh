@@ -20,11 +20,15 @@ function publish() {
     git config user.name "Git Actions"
     echo $(git config user.email)
     echo $(git config user.name)
-    git clone --quiet --branch=${TARGET_BRANCH} https://${TOKEN}@github.com/${REPO}.git ${TARGET_BRANCH} > /dev/null
+    #--quiet
+    # > /dev/null
+    git clone --branch=${TARGET_BRANCH} https://${TOKEN}@github.com/${REPO}.git ${TARGET_BRANCH}
     cd ${working_dir}/${TARGET_BRANCH}
-    find ./* -path ./.git -prune -exec rm -rf {} \;  2>/dev/null
-    echo "www.mindfield.dk" > ${working_dir}/${TARGET_BRANCH}/CNAME
-    cp -r ${working_dir}/dist/* ${working_dir}/${TARGET_BRANCH}
+    ls -la
+    echo "Something\n" >> test.txt
+    #find ./* -path ./.git -prune -exec rm -rf {} \;  2>/dev/null
+    #echo "www.mindfield.dk" > ${working_dir}/${TARGET_BRANCH}/CNAME
+    #cp -r ${working_dir}/dist/* ${working_dir}/${TARGET_BRANCH}
     git add -f .
     git commit -m "Github Actions build ${RUN} deploy"
     git push -fq origin ${TARGET_BRANCH} > /dev/null
