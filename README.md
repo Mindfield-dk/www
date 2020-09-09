@@ -1,4 +1,3 @@
-[![MIT License][license-shield]][license.md]
 ![CI](https://github.com/Mindfield-dk/mindfield-dk.github.io/workflows/CI/badge.svg)
 
 ## Table of Contents
@@ -17,13 +16,12 @@
 
 ## About The Project
 
-[![SiteScreen Shot][site-screenshot]](preview.png)
+![SiteScreen Shot](/preview.png)
 
 ### Built With
 
 -   [Bootstrap](https://getbootstrap.com)
 -   [Vuejs](https://vuejs.com)
-
 
 ## Getting Started
 
