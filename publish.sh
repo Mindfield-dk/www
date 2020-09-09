@@ -76,6 +76,5 @@ while getopts ${optstring} arg; do
   esac
 done
 
-env
 check
 publish
