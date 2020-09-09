@@ -4,7 +4,7 @@
     <navigation />
     <b-container class="main">
       <router-view />
-      <footer>
+      <footer class="footer mt-auto">
         <p>&copy; 2020 Mindfield (Build: {{ build }})</p>
       </footer>
     </b-container>
@@ -34,8 +34,16 @@ body {
   color: #5a5a5a;
 }
 
+.footer {
+  text-align: right;
+  margin:0 0;
+  padding:0 0;
+}
+
 .main {
-  background-color: #ffffff;
+  margin:0 0;
+  padding:0 0;
+  background-color: #eeeeee;
 }
 
 .marketing {

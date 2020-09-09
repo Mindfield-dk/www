@@ -2,7 +2,7 @@
   <b-container>
     <b-row>
       <b-col>
-        <h1>Comming</h1>
+        <h1>Coming</h1>
       </b-col>
     </b-row>
   </b-container>
