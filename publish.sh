@@ -13,29 +13,20 @@ function publish() {
     echo "Publishing to ${TARGET_BRANCH} on ${REPO}"
     if [ -d ./${TARGET_BRANCH} ]; then rm -rf ./${TARGET_BRANCH}; fi
     working_dir=$(pwd)
-    #--quiet
-    # > /dev/null
-    git clone --branch=${TARGET_BRANCH} https://${ACTOR}:${TOKEN}@github.com/${REPO}.git ${TARGET_BRANCH}
+    git clone --quiet --branch=${TARGET_BRANCH} https://${ACTOR}:${TOKEN}@github.com/${REPO}.git ${TARGET_BRANCH} > /dev/null
     cd ${working_dir}/${TARGET_BRANCH}
     if [ ! -z "$(git config user.email)" ]; then org_name="$(git config user.email)"; fi
     if [ ! -z "$(git config user.name)" ]; then org_email="$(git config user.name)"; fi
-    echo ${org_email}
-    echo ${org_name}
     git config user.email "actions@github.com"
     git config user.name "Git Actions"
-    echo $(git config user.email)
-    echo $(git config user.name)
-    echo "Something\n" >> test.txt
-    #find ./* -path ./.git -prune -exec rm -rf {} \;  2>/dev/null
-    #echo "www.mindfield.dk" > ${working_dir}/${TARGET_BRANCH}/CNAME
-    #cp -r ${working_dir}/dist/* ${working_dir}/${TARGET_BRANCH}
+    find ./* -path ./.git -prune -exec rm -rf {} \;  2>/dev/null
+    echo "www.mindfield.dk" > ${working_dir}/${TARGET_BRANCH}/CNAME
+    cp -r ${working_dir}/dist/* ${working_dir}/${TARGET_BRANCH}
     git add -f .
-    git commit -m "Github Actions build ${RUN} deploy"
+    git commit -m "Github Actions published to ${TARGET_BRANCH} (build: ${RUN})"
     git push -fq origin ${TARGET_BRANCH} > /dev/null
     if [ ! -z "${org_email}" ]; then git config user.email "${org_email}";  fi
     if [ ! -z "${org_name}" ];  then git config user.name "${org_name}"; fi
-    echo ${org_email}
-    echo ${org_name}
     cd ${working_dir}
     if [ -d ${TARGET_BRANCH} ]; then rm -rf ${TARGET_BRANCH}; fi
   else
