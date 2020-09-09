@@ -12,6 +12,10 @@ function publish() {
     echo "Publishing to ${TARGET_BRANCH} on ${REPO}"
     if [ -d ./${TARGET_BRANCH} ]; then rm -rf ./${TARGET_BRANCH}; fi
     working_dir=$(pwd)
+    #--quiet
+    # > /dev/null
+    git clone --branch=${TARGET_BRANCH} https://${TOKEN}@github.com/${REPO}.git ${TARGET_BRANCH}
+    cd ${working_dir}/${TARGET_BRANCH}
     if [ ! -z "$(git config user.email)" ]; then org_name="$(git config user.email)"; fi
     if [ ! -z "$(git config user.name)" ]; then org_email="$(git config user.name)"; fi
     echo ${org_email}
@@ -20,11 +24,6 @@ function publish() {
     git config user.name "Git Actions"
     echo $(git config user.email)
     echo $(git config user.name)
-    #--quiet
-    # > /dev/null
-    git clone --branch=${TARGET_BRANCH} https://${TOKEN}@github.com/${REPO}.git ${TARGET_BRANCH}
-    cd ${working_dir}/${TARGET_BRANCH}
-    ls -la
     echo "Something\n" >> test.txt
     #find ./* -path ./.git -prune -exec rm -rf {} \;  2>/dev/null
     #echo "www.mindfield.dk" > ${working_dir}/${TARGET_BRANCH}/CNAME
