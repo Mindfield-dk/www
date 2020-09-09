@@ -1,18 +1,23 @@
 <template>
   <b-container id="app">
+    <mvidio />
     <navigation />
-    <router-view />
-    <footer>
-      <p>&copy; 2020 Mindfield (Build: {{build}})</p>
-    </footer>
+    <b-container class="main">
+      <router-view />
+      <footer>
+        <p>&copy; 2020 Mindfield (Build: {{ build }})</p>
+      </footer>
+    </b-container>
   </b-container>
 </template>
 
 <script>
 import Navigation from "./components/Navigation.vue";
+import Video from "./components/Video.vue";
 export default {
   components: {
-    navigation: Navigation
+    navigation: Navigation,
+    mvidio: Video
   },
   data() {
     return {
@@ -27,6 +32,10 @@ body {
   padding-top: 3rem;
   padding-bottom: 3rem;
   color: #5a5a5a;
+}
+
+.main {
+  background-color: #ffffff;
 }
 
 .marketing {
