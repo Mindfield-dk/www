@@ -15,7 +15,7 @@ function publish() {
     working_dir=$(pwd)
     #--quiet
     # > /dev/null
-    git clone --branch=${TARGET_BRANCH} https://${ACTRO}:${TOKEN}@github.com/${REPO}.git ${TARGET_BRANCH}
+    git clone --branch=${TARGET_BRANCH} https://${ACTOR}:${TOKEN}@github.com/${REPO}.git ${TARGET_BRANCH}
     cd ${working_dir}/${TARGET_BRANCH}
     if [ ! -z "$(git config user.email)" ]; then org_name="$(git config user.email)"; fi
     if [ ! -z "$(git config user.name)" ]; then org_email="$(git config user.name)"; fi
