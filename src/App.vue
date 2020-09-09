@@ -3,7 +3,7 @@
     <navigation />
     <router-view />
     <footer>
-      <p>&copy; 2020 Mindfield</p>
+      <p>&copy; 2020 Mindfield (Build: {{build}})</p>
     </footer>
   </b-container>
 </template>
@@ -13,6 +13,11 @@ import Navigation from "./components/Navigation.vue";
 export default {
   components: {
     navigation: Navigation
+  },
+  data() {
+    return {
+      build: process.env.VUE_APP_VERSION
+    };
   }
 };
 </script>

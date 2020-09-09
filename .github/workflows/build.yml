@@ -25,6 +25,7 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: Build
       run: |
+        export VUE_APP_VERSION=${{ GITHUB_RUN_NUMBER }}
         npm install
         npm run build
         ./publish.sh -t ${{ secrets.GITHUB_TOKEN }}

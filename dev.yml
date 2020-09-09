@@ -6,6 +6,8 @@ services:
       context: ./
     command: ["npm", "run", "serve"]
     working_dir: /tmp/
+    environment:
+      VUE_APP_VERSION: development
     ports:
       - "80:80"
       - "8000:8000"

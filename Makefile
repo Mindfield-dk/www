@@ -39,7 +39,7 @@ install:
 
 # Build webpage
 build:
-	@docker run --rm -v ${PWD}/:/tmp -w /tmp ${IMAGE} npm run build
+	@docker run -e "VUE_APP_VERSION=localbuild" --rm -v ${PWD}/:/tmp -w /tmp ${IMAGE} npm run build
 
 # Publish weppage
 publish:
