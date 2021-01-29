@@ -1,10 +1,19 @@
 .DS_Store
+hsperfdata_root
 node_modules
 /dist
 
 # local env files
+.firebaserc
 .env.local
 .env.*.local
+.env
 
 # Log files
 npm-debug.log*
+ui-debug.log
+firestore-debug.log
+firebase-debug.log
+
+# tmp files
+*.tmp

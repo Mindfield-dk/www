@@ -25,6 +25,10 @@ start:
 server_shell:
 	@docker-compose -f dev.yml exec devserver bash
 
+# Run firebase login
+firebase_login:
+	@docker-compose -f dev.yml exec devserver firebase login --no-localhost
+
 # Start vue ui
 vue:
 	@docker-compose -f dev.yml exec devserver vue ui -H 0.0.0.0 -p 8000

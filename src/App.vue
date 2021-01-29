@@ -1,6 +1,5 @@
 <template>
   <b-container id="app">
-    <mvidio />
     <navigation />
     <b-container class="main">
       <router-view />
@@ -13,17 +12,15 @@
 
 <script>
 import Navigation from "./components/Navigation.vue";
-import Video from "./components/Video.vue";
 export default {
   components: {
     navigation: Navigation,
-    mvidio: Video
   },
   data() {
     return {
-      build: process.env.VUE_APP_VERSION
+      build: process.env.VUE_APP_VERSION,
     };
-  }
+  },
 };
 </script>
 
@@ -36,13 +33,13 @@ body {
 
 .footer {
   text-align: right;
-  margin:0 0;
-  padding:0 0;
+  margin: 0 0;
+  padding: 0 0;
 }
 
 .main {
-  margin:0 0;
-  padding:0 0;
+  margin: 0 0;
+  padding: 0 0;
   background-color: #eeeeee;
 }
 
