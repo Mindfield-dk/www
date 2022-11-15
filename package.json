@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "bootstrap-vue": "^2.23.1",
-    "core-js": "3.25.3",
+    "core-js": "3.26.1",
     "firebase": "9.10.0",
     "vue": "2.7.10",
     "vue-router": "3.6.5",
