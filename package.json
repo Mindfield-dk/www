@@ -29,7 +29,7 @@
     "chai": "^4.3.7",
     "eslint": "^8.36.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-vue": "^9.9.0",
+    "eslint-plugin-vue": "^9.11.1",
     "prettier": "^2.8.4",
     "vue-template-compiler": "^2.7.10"
   },
