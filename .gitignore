@@ -1,19 +1,24 @@
-.DS_Store
-hsperfdata_root
+# Nuxt dev/build outputs
+.output
+.nuxt
+.nitro
+.cache
+dist
+
+# Node dependencies
 node_modules
-/dist
 
-# local env files
-.firebaserc
-.env.local
-.env.*.local
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
 .env
-
-# Log files
-npm-debug.log*
-ui-debug.log
-firestore-debug.log
-firebase-debug.log
-
-# tmp files
-*.tmp
+.env.*
+!.env.example
+bin/act

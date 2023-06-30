@@ -1,90 +1,63 @@
-![CI](https://github.com/Mindfield-dk/mindfield-dk.github.io/workflows/CI/badge.svg)
+# Nuxt 3 Minimal Starter
 
-## Table of Contents
+Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
--   [About the Project](#about-the-project)
-    -   [Built With](#built-with)
--   [Getting Started](#getting-started)
-    -   [Prerequisites](#prerequisites)
-    -   [Installation](#installation)
--   [Usage](#usage)
--   [Roadmap](#roadmap)
--   [Contributing](#contributing)
--   [License](#license)
--   [Contact](#contact)
--   [Acknowledgements](#acknowledgements)
+## Setup
 
-## About The Project
+Make sure to install the dependencies:
 
-![SiteScreen Shot](/preview.png)
-
-### Built With
-
--   [Bootstrap](https://getbootstrap.com)
--   [Vuejs](https://vuejs.com)
-
-## Getting Started
-
-### Prerequisites
-
--   nodejs
--   npm
-
-### Installation
-
-1.  Clone the repo
-
-```sh
-git clone https://github.com/Mindfield-dk/mindfield-dk.github.io.git
-cd mindfield-dk.github.io
-```
-
-1.  Install NPM packages
-
-```sh
+```bash
+# npm
 npm install
+
+# pnpm
+pnpm install
+
+# yarn
+yarn install
 ```
 
-2.  Build
+## Development Server
 
-```sh
+Start the development server on `http://localhost:3000`:
+
+```bash
+# npm
+npm run dev
+
+# pnpm
+pnpm run dev
+
+# yarn
+yarn dev
+```
+
+## Production
+
+Build the application for production:
+
+```bash
+# npm
 npm run build
+
+# pnpm
+pnpm run build
+
+# yarn
+yarn build
 ```
 
-### Devlopment
+Locally preview production build:
 
--   Dev server
+```bash
+# npm
+npm run preview
 
-```sh
-npm run serve
+# pnpm
+pnpm run preview
+
+# yarn
+yarn preview
 ```
 
--   Lint
-
-```sh
-npm run build
-```
-
--   Test
-
-```sh
-npm run test:unit
-```
-
-## Contributing
-
-Any contributions you make are **greatly appreciated**.
-
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
-
-## License
-
-Distributed under the MIT License. See `LICENSE.md` for more information.
-
-## Contact
-
-Project Link: <https://github.com/Mindfield-dk/mindfield-dk.github.io>
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

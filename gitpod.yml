@@ -1,0 +1,19 @@
+tasks:
+  - name: Global dependencies
+    before: |
+      npm install --location=global npm@latest
+      npm install --location=global typescript@latest
+      curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
+  - name: Npm install
+    init: npm install
+  - name: Start dev
+    command: npm run dev
+gitConfig:
+  alias.st: status
+  alias.co: checkout
+vscode:
+  extensions:
+    - usernamehw.errorlens
+    - dbaeumer.vscode-eslint
+    - medo64.render-crlf
+    - Vue.volar
