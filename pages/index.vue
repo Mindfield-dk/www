@@ -1,12 +1,39 @@
 <template>
   <div>
-    <MainNavigation/>
+    <MainNavigation />
     <div class="container">
       <h1>Unlocking Boundless Potential with Mindfield</h1>
-      <p>Experience the power of Mindfield, the revolutionary service that transcends boundaries and unleashes unimaginable
+      <p>Experience the power of Mindfield, the revolutionary service that transcends boundaries and unleashes
+        unimaginable
         possibilities.</p>
       <a href="https://github.com/Mindfield-dk" class="btn btn-primary">Discover More</a>
     </div>
+
+
+
+
+
+    <div class="row">
+      <div v-for="re in repo" v-bind:key="re?.name" class="col-sm-6">
+        <div class="card" style="width: 18rem;">
+      <img :src="re?.owner.avatar_url" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ re?.name }}</h5>
+        <p class="card-text">{{ re?.description }}</p>
+        <a :href="re?.html_url" class="btn btn-primary">Go</a>
+      </div>
+    </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
 
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
@@ -29,7 +56,8 @@
         </div>
         <div class="carousel-item">
           <h1>The Power of Mindfield</h1>
-          <p>Mindfield harnesses the power of cutting-edge technology to connect people, ideas, and opportunities like never
+          <p>Mindfield harnesses the power of cutting-edge technology to connect people, ideas, and opportunities like
+            never
             before. It opens the door to a realm of endless exploration and creativity, where the only limit is your
             imagination.</p>
         </div>
@@ -41,12 +69,14 @@
         </div>
         <div class="carousel-item">
           <h1>Discover New Frontiers</h1>
-          <p>With Mindfield, you'll embark on a transformative journey of discovery. Explore uncharted territories, uncover
+          <p>With Mindfield, you'll embark on a transformative journey of discovery. Explore uncharted territories,
+            uncover
             hidden gems, and embrace the unknown, all from the comfort of your fingertips.</p>
         </div>
         <div class="carousel-item">
           <h1>Empowering Creativity</h1>
-          <p>Mindfield is a catalyst for creativity, empowering individuals to unlock their full potential. Whether you're an
+          <p>Mindfield is a catalyst for creativity, empowering individuals to unlock their full potential. Whether you're
+            an
             artist, entrepreneur, or dreamer, Mindfield provides the tools and inspiration to turn ideas into reality.</p>
         </div>
         <div class="carousel-item">
@@ -61,7 +91,8 @@
         </div>
         <div class="carousel-item">
           <h1>Embrace the Future</h1>
-          <p>Mindfield is a glimpse into the future, where possibilities are endless and innovation knows no bounds. Embrace
+          <p>Mindfield is a glimpse into the future, where possibilities are endless and innovation knows no bounds.
+            Embrace
             this transformative service and be at the forefront of a new era of connectivity and exploration.</p>
         </div>
         <div class="carousel-item">
@@ -86,8 +117,11 @@
 </template>
 
 <script setup lang="ts">
-const unsplash = await useFetch(() =>'/api/photos?id=aJTiW00qqtI&w=200')
+
+const unsplash = await useFetch(() => '/api/photos?id=aJTiW00qqtI&w=200')
+const repos = await useFetch(() => '/api/github/repos')
 const image = unsplash.data.value as string
+const repo = repos.data.value
 </script>
 
 <style lang="css" scoped>  .container {

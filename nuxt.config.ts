@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     ssr: true,
     runtimeConfig: {
       UNSPLASH_ACCESS_KEY: process.env.UNSPLASH_ACCESS_KEY,
-      NO_DANGER: process.env.NO_DANGER
+      GITHUB_TOKEN: process.env.GITHUB_TOKEN
     },
     nitro: {
       preset: "cloudflare_pages",
