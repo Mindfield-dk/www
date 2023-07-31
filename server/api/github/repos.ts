@@ -1,8 +1,8 @@
 import { Octokit } from "@octokit/rest";
+import Repository from "./Repository"
 
 class GitHubRepositories {
-
-  private octokit
+  private octokit;
 
   constructor() {
     const { GITHUB_TOKEN } = useRuntimeConfig();
@@ -12,52 +12,53 @@ class GitHubRepositories {
   }
 
   async getAllRepositories() {
-    let repositories = await this.getOrgRepositories('Mindfield-dk')
-    repositories = repositories.concat(await this.getAllRepositoriesForUser('localgod'))
-    //console.log(repositories.length);
-    return repositories;
+    const orgRepos = await this.getOrgRepositories('Mindfield-dk');
+    const userRepos = await this.getAllNonArchivedRepositoriesForUser('localgod');
+    return [...orgRepos, ...userRepos];
   }
 
-  async getAllRepositoriesForUser(username: string) {
-    const repository = await this.octokit.repos.listForUser({
-      username,
-      per_page: 100,
-
-    });
-    console.log(repository.data.filter(item => item.archived === false))
-    return repository.data.filter(item => item.archived === false)
-  }
-
-  async getOrgRepositories(org: string) {
-    let repos = []
-    let page = 1
-    let response
-
-    do {
-      response = await this.octokit.repos.listForOrg({
-        org: org,
+  async getAllNonArchivedRepositoriesForUser(username: string): Promise<Repository[]> {
+    try {
+      const response = await this.octokit.repos.listForUser({
+        username,
         per_page: 100,
-        page,
+        archived: false,
       });
 
-      repos = repos.concat(response.data);
-      page++;
-    } while (response.headers.link && response.headers.link.includes('rel="next"'))
-
-    return repos;
+      return response.data as Repository[]
+    } catch (error) {
+      console.error('Error fetching repositories for user:', username, error);
+      throw error;
+    }
   }
 
-  async getSingleRepository(owner: string, repo: string) {
-    const repository = await this.octokit.repos.get({
-      owner: owner,
-      repo: repo,
-    });
+  async getOrgRepositories(org: string): Promise<Repository[]> {
+    try {
+      let repos: Repository[] = [];
+      let page = 1;
+      let response;
 
-    return repository.data
+      do {
+        response = await this.octokit.repos.listForOrg({
+          org: org,
+          per_page: 100,
+          page,
+        });
+
+        repos = repos.concat(response.data as Repository[]);
+
+        page++;
+      } while (response.headers.link && response.headers.link.includes('rel="next"'));
+
+      return repos;
+    } catch (error) {
+      console.error('Error fetching repositories for organization:', org, error);
+      throw error;
+    }
   }
 }
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   const gitHubRepositories = new GitHubRepositories();
   return await gitHubRepositories.getAllRepositories();
-})
+});

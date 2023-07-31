@@ -15,19 +15,19 @@
 
     <div class="row">
 
-      <div v-for="re in repo" v-bind:key="re?.name" class="col-sm-4">
+      <div v-for="repo in repos" v-bind:key="repo?.name" class="col-sm-4">
         <div class="card" style="width: 18rem;">
           <div class="card-header">
-            <h3>{{ re?.name }}</h3>
+            <h3>{{ repo?.name }}</h3>
           </div>
           <div class="card-body">
-            <p class="card-text">{{ re?.description }}
+            <p class="card-text">{{ repo?.description }}
 
             </p>
-            <a :href="re?.html_url" class="btn btn-primary">Go</a>
+            <a :href="repo?.html_url" class="btn btn-primary">Go</a>
           </div>
           <div class="card-footer">
-            <span v-for="topic in re?.topics" v-bind:key="topic" class="badge bg-secondary">{{ topic }}</span>
+            <span v-for="topic in repo?.topics" v-bind:key="topic" class="badge bg-secondary">{{ topic }}</span>
           </div>
         </div>
       </div>
@@ -115,11 +115,7 @@
 </template>
 
 <script setup lang="ts">
-
-const unsplash = await useFetch(() => '/api/photos?id=aJTiW00qqtI&w=200')
-const repos = await useFetch(() => '/api/github/repos')
-const image = unsplash.data.value as string
-const repo = repos.data.value
+const repos = (await useFetch(() => '/api/github/repos')).data.value
 </script>
 
 <style lang="css" scoped>  .container {
