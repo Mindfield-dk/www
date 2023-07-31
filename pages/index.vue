@@ -14,26 +14,24 @@
 
 
     <div class="row">
-      <div v-for="re in repo" v-bind:key="re?.name" class="col-sm-6">
+
+      <div v-for="re in repo" v-bind:key="re?.name" class="col-sm-4">
         <div class="card" style="width: 18rem;">
-      <img :src="re?.owner.avatar_url" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{ re?.name }}</h5>
-        <p class="card-text">{{ re?.description }}</p>
-        <a :href="re?.html_url" class="btn btn-primary">Go</a>
+          <div class="card-header">
+            <h3>{{ re?.name }}</h3>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{ re?.description }}
+
+            </p>
+            <a :href="re?.html_url" class="btn btn-primary">Go</a>
+          </div>
+          <div class="card-footer">
+            <span v-for="topic in re?.topics" v-bind:key="topic" class="badge bg-secondary">{{ topic }}</span>
+          </div>
+        </div>
       </div>
     </div>
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-
 
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
@@ -175,5 +173,4 @@ const repo = repos.data.value
     font-size: 18px;
     margin-bottom: 40px;
     color: #666666;
-  }
-</style>
+  }</style>
