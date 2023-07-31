@@ -21,11 +21,10 @@ class GitHubRepositories {
     try {
       const response = await this.octokit.repos.listForUser({
         username,
-        per_page: 100,
-        archived: false,
+        per_page: 100
       });
 
-      return response.data as Repository[]
+      return (response.data as Repository[]).filter(repo => repo.archived === false)
     } catch (error) {
       console.error('Error fetching repositories for user:', username, error);
       throw error;
