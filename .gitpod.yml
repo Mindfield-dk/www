@@ -5,7 +5,6 @@ tasks:
       curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
     init: |
       npm install
-      ./node_modules/.bin/sanity login
     command: npm run dev
   - name: Terminal
     openMode: split-right
