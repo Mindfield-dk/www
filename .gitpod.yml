@@ -2,7 +2,6 @@ tasks:
   - name: Init dev tools 
     before: |
       npm install --location=global npm@latest typescript@latest
-      curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
     init: |
       npm install
     command: npm run dev
