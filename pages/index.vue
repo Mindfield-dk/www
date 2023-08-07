@@ -8,10 +8,9 @@
         possibilities.</p>
       <a href="https://github.com/Mindfield-dk" class="btn btn-primary">Discover More</a>
     </div>
-
-
-
-
+<ul>
+<li v-for="p in person" v-bind:key="p.name">{{ p.name }}</li>
+</ul>
 
     <div class="row">
 
@@ -116,6 +115,7 @@
 
 <script setup lang="ts">
 const repos = (await useFetch(() => '/api/github/repos')).data.value
+const person = (await useFetch(() => '/api/sanity/person')).data.value
 </script>
 
 <style lang="css" scoped>  .container {

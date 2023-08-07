@@ -1,10 +1,14 @@
 tasks:
-  - before: |
-      npm install --location=global npm@latest
-      npm install --location=global typescript@latest
+  - name: Init dev tools 
+    before: |
+      npm install --location=global npm@latest typescript@latest
       curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
-    init: npm install
+    init: |
+      npm install
+      ./node_modules/.bin/sanity login
     command: npm run dev
+  - name: Terminal
+    openMode: split-right
 gitConfig:
   alias.st: status
   alias.co: checkout
