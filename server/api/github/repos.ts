@@ -59,5 +59,11 @@ class GitHubRepositories {
 
 export default defineEventHandler(async () => {
   const gitHubRepositories = new GitHubRepositories();
-  return await gitHubRepositories.getAllRepositories();
+  return (await gitHubRepositories.getAllRepositories()).filter((repo) => {
+    return !repo.topics.includes('personal')
+  } ).sort((a: Repository, b: Repository) => {
+    const dateA: Date = new Date(a.created_at as string);
+    const dateB: Date = new Date(b.created_at as string);
+    return dateB.getTime() - dateA.getTime();
+})
 });
