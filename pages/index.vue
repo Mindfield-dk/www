@@ -53,6 +53,12 @@ function ucfirst(str: string): string {
   }
 }
 
+/**
+ * Formats a given date into a specific format.
+ *
+ * @param {string} inputDate - The input date to be formatted.
+ * @return {string} The formatted date in the format "DD/MM-YYYY".
+ */
 function formatDate(inputDate: string): string {
   const date = new Date(inputDate);
 
@@ -60,7 +66,7 @@ function formatDate(inputDate: string): string {
   const month = String(date.getUTCMonth() + 1).padStart(2, '0');
   const year = String(date.getUTCFullYear());
 
-  return `${day}/${month} ${year}`;
+  return `${day}/${month}-${year}`;
 }
 </script>
 
