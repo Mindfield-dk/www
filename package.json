@@ -20,7 +20,7 @@
         "eslint": "^8.57.0",
         "eslint-plugin-vue": "^9.27.0",
         "nuxt": "^3.12.4",
-        "typescript": "^5.5.2",
+        "typescript": "^5.5.4",
         "unsplash-js": "^7.0.19"
     },
     "dependencies": {
