@@ -24,7 +24,7 @@
         "unsplash-js": "^7.0.19"
     },
     "dependencies": {
-        "@octokit/rest": "^21.0.1",
+        "@octokit/rest": "^21.0.2",
         "@sanity/client": "^6.21.3",
         "unsplash-js": "^7.0.19"
     }
