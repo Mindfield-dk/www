@@ -18,7 +18,7 @@
         "@typescript-eslint/eslint-plugin": "^8.39.0",
         "@typescript-eslint/parser": "^8.39.0",
         "eslint": "^9.31.0",
-        "eslint-plugin-vue": "^10.3.0",
+        "eslint-plugin-vue": "^10.4.0",
         "nuxt": "^4.0.3",
         "typescript": "^5.8.3",
         "unsplash-js": "^7.0.19"
