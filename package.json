@@ -19,7 +19,7 @@
         "@typescript-eslint/parser": "^8.39.0",
         "eslint": "^9.34.0",
         "eslint-plugin-vue": "^10.4.0",
-        "nuxt": "^4.1.0",
+        "nuxt": "^4.1.1",
         "typescript": "^5.9.2",
         "unsplash-js": "^7.0.19"
     },
