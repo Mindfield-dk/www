@@ -21,11 +21,11 @@
         "eslint-plugin-vue": "^10.5.0",
         "nuxt": "^4.1.2",
         "typescript": "^5.9.2",
-        "unsplash-js": "^7.0.19"
+        "unsplash-js": "^7.0.20"
     },
     "dependencies": {
         "@octokit/rest": "^22.0.0",
         "@sanity/client": "^7.11.2",
-        "unsplash-js": "^7.0.19"
+        "unsplash-js": "^7.0.20"
     }
 }
