@@ -20,7 +20,6 @@ A modern portfolio website showcasing open source projects from Mindfield and co
 - **Icons:** [Heroicons](https://heroicons.com/) - Beautiful hand-crafted SVG icons
 - **API Integration:** 
   - [Octokit](https://github.com/octokit/rest.js) - GitHub REST API client
-  - [Sanity](https://www.sanity.io/) - Headless CMS (optional)
   - [Unsplash](https://unsplash.com/developers) - Photo API (optional)
 - **Deployment:** [Cloudflare Pages](https://pages.cloudflare.com/)
 - **Development:** TypeScript, ESLint, Gitpod
@@ -120,7 +119,6 @@ Edit `server/api/github/repos.ts` to modify:
 
 - **Navigation:** `app/components/MainNavigation.vue`
 - **Main Page:** `app/pages/index.vue`
-- **Person List:** `app/components/PersonList.vue` (currently unused)
 
 ## 🧪 Linting
 
@@ -144,8 +142,7 @@ npm run lintfix
 │   ├── app.vue              # Root Vue component
 │   ├── assets/              # CSS and static assets
 │   ├── components/          # Vue components
-│   │   ├── MainNavigation.vue
-│   │   └── PersonList.vue
+│   │   └── MainNavigation.vue
 │   └── pages/               # File-based routing
 │       └── index.vue        # Home page
 ├── server/
@@ -153,8 +150,7 @@ npm run lintfix
 │       ├── github/          # GitHub API integration
 │       │   ├── repos.ts     # Fetch repositories
 │       │   └── Repository.ts
-│       ├── photos.ts        # Unsplash integration
-│       └── sanity/          # Sanity CMS integration
+│       └── photos.ts        # Unsplash integration
 ├── public/                  # Static files
 ├── nuxt.config.ts          # Nuxt configuration
 ├── tsconfig.json           # TypeScript configuration

@@ -111,7 +111,6 @@
 
 <script setup lang="ts">
 const { data: repos } = await useFetch('/api/github/repos')
-// const { data: person } = await useFetch('/api/sanity/person')
 
 /**
  * Capitalizes the first letter of a string.
