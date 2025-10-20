@@ -1,0 +1,30 @@
+{
+	"name": "Ona",
+	"build": {
+        "context": ".",
+        "dockerfile": "Dockerfile"
+    },
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker": {
+			"moby": false
+		},
+		"ghcr.io/devcontainers/features/node": {
+			"nodeGypDependencies": true,
+			"version": "lts",
+			"nvmVersion": "latest"
+		},
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"DavidAnson.vscode-markdownlint",
+				"usernamehw.errorlens",
+				"randomfractalsinc.geo-data-viewer",
+                "Vue.volar",
+			    "dbaeumer.vscode-eslint",
+                "medo64.render-crlf"
+			]
+		}
+	}
+}

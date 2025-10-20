@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+    modules: ['@nuxt/eslint'],
     devtools: { enabled: true },
     telemetry: false,
     ssr: true,
@@ -16,7 +17,7 @@ export default defineNuxtConfig({
       }
     },
     css: [
-        '@/assets/css/main.css',
+        '~/assets/css/main.css',
     ],
     app: {
       head: {

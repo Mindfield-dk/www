@@ -1,5 +1,5 @@
 import { Octokit } from "@octokit/rest";
-import Repository from "./Repository"
+import type Repository from "./Repository"
 
 class GitHubRepositories {
   private octokit;

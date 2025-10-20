@@ -1,0 +1,44 @@
+tasks:
+  # Install dependencies
+  # Runs automatically on environment start
+  # Can also be triggered manually: gitpod automations task start install-deps
+  install-deps:
+    name: Install Dependencies
+    command: |
+      echo "📦 Installing dependencies..."
+      npm install
+      echo "✅ Dependencies installed"
+    triggeredBy:
+      - postEnvironmentStart
+   
+
+
+  
+
+  
+
+
+services:
+  # Nuxt development server with hot reload
+  nuxt-dev:
+    name: Nuxt Dev Server
+    description: Nuxt development server with hot module replacement
+    commands:
+      start: |
+        echo "⏳ Waiting for dependencies..."
+        while [ ! -d "node_modules" ]; do
+          sleep 1
+        done
+        
+        echo "🚀 Starting Nuxt development server..."
+        npm run dev
+      ready: |
+        if curl -s http://localhost:3000/api/health > /dev/null 2>&1; then
+          echo "✅ Nuxt dev server is ready"
+          exit 0
+        else
+          echo "⏳ Nuxt dev server is not ready yet"
+          exit 1
+        fi
+    triggeredBy:
+      - postEnvironmentStart

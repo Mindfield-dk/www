@@ -7,13 +7,14 @@
 
     <div class="container">
       <div class="list-group col-sm-12">
-        <span v-for="repo in repos" v-bind:key="repo?.name" class="list-group-item list-group-item-action"
+        <span
+v-for="repo in repos" :key="repo?.name" class="list-group-item list-group-item-action"
           aria-current="true">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">
               <h3>{{ ucfirst(repo?.name) }}</h3>
             </h5>
-            <small><span v-for="topic in repo?.topics" v-bind:key="topic" class="m-1 badge bg-secondary">{{ topic
+            <small><span v-for="topic in repo?.topics" :key="topic" class="m-1 badge bg-secondary">{{ topic
             }}</span></small>
           </div>
 
@@ -26,9 +27,9 @@
             </h6>
           </div>
           <p class="mb-1">{{ repo?.description }}</p>
-          <span><a v-if="repo.html_url" :href="repo?.html_url"><i class="bi bi-github"></i>Github</a>
+          <span><a v-if="repo.html_url" :href="repo?.html_url"><i class="bi bi-github"/>Github</a>
             <span v-if="repo.homepage"> | </span>
-            <a v-if="repo.homepage" :href="repo?.homepage"><i class="bi bi-link-45deg"></i>Homepage</a></span>
+            <a v-if="repo.homepage" :href="repo?.homepage"><i class="bi bi-link-45deg"/>Homepage</a></span>
         </span>
       </div>
     </div>
@@ -36,8 +37,8 @@
 </template>
 
 <script setup lang="ts">
-const repos = (await useFetch(() => '/api/github/repos')).data.value
-// const person = (await useFetch(() => '/api/sanity/person')).data.value
+const { data: repos } = await useFetch('/api/github/repos')
+// const { data: person } = await useFetch('/api/sanity/person')
 
 /**
  * Capitalizes the first letter of a string.

@@ -1,6 +1,6 @@
 <template>
     <ul>
-        <li v-for="p in person" v-bind:key="p.name">{{ p.name }}</li>
+        <li v-for="p in person" :key="p.name">{{ p.name }}</li>
     </ul>
 </template>
   
