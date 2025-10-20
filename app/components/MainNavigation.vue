@@ -1,20 +1,17 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Mindfield</a>
-      <button
-class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"/>
-      </button>
-      <div id="navbarSupportedContent" class="collapse navbar-collapse">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0"/>
-      </div>
-    </div>
-  </nav>
+  <UHeader class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 shadow-sm">
+    <template #left>
+      <NuxtLink to="/" class="flex items-center gap-2 font-bold text-xl text-[#000000] dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+        <UIcon name="i-heroicons-cube" class="w-7 h-7" />
+        <span>Mindfield</span>
+      </NuxtLink>
+    </template>
+
+    <template #right>
+      <ColorModeButton />
+    </template>
+  </UHeader>
 </template>
 
 <script setup lang="ts">
 </script>
-
-<style lang="css" scoped></style>

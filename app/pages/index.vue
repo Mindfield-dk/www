@@ -1,38 +1,111 @@
 <template>
-  <div>
+  <div class="min-h-screen">
     <MainNavigation />
-    <!--
-<PersonList :person="person" />
--->
-
-    <div class="container">
-      <div class="list-group col-sm-12">
-        <span
-v-for="repo in repos" :key="repo?.name" class="list-group-item list-group-item-action"
-          aria-current="true">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">
-              <h3>{{ ucfirst(repo?.name) }}</h3>
-            </h5>
-            <small><span v-for="topic in repo?.topics" :key="topic" class="m-1 badge bg-secondary">{{ topic
-            }}</span></small>
-          </div>
-
-          <div class="d-flex w-100 justify-content-between">
-            <h6 class="mb-1">
-              Created: {{ formatDate(repo.created_at as string) }}
-            </h6>
-            <h6 class="mb-1">
-              Updated: {{ formatDate(repo.updated_at as string) }}
-            </h6>
-          </div>
-          <p class="mb-1">{{ repo?.description }}</p>
-          <span><a v-if="repo.html_url" :href="repo?.html_url"><i class="bi bi-github"/>Github</a>
-            <span v-if="repo.homepage"> | </span>
-            <a v-if="repo.homepage" :href="repo?.homepage"><i class="bi bi-link-45deg"/>Homepage</a></span>
-        </span>
+    
+    <UContainer class="py-8 sm:py-12">
+      <!-- Header Section with backdrop -->
+      <div class="mb-10 text-center">
+        <div class="inline-block bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm px-8 py-6 rounded-2xl shadow-lg">
+          <h1 class="text-4xl sm:text-5xl font-bold text-[#000000] dark:!text-white mb-3">
+            Our Projects
+          </h1>
+          <p class="text-lg text-gray-800 dark:text-gray-100 max-w-2xl">
+            Explore our open source repositories and contributions
+          </p>
+        </div>
       </div>
-    </div>
+
+      <!-- Repository Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <UCard
+          v-for="repo in repos"
+          :key="repo?.name"
+          class="hover:shadow-2xl transition-all duration-200 hover:scale-[1.02] bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm"
+        >
+          <template #header>
+            <div class="flex items-start justify-between gap-3">
+              <h3 class="text-xl font-bold text-[#000000] dark:!text-white truncate">
+                {{ ucfirst(repo?.name) }}
+              </h3>
+              <UIcon 
+                name="i-heroicons-code-bracket-square" 
+                class="w-6 h-6 text-primary-600 dark:text-primary-400 flex-shrink-0"
+              />
+            </div>
+          </template>
+
+          <div class="space-y-4">
+            <!-- Description -->
+            <p class="text-gray-800 dark:text-gray-100 text-sm leading-relaxed line-clamp-3 min-h-[3.75rem]">
+              {{ repo?.description || 'No description available' }}
+            </p>
+
+            <!-- Topics/Tags -->
+            <div v-if="repo?.topics?.length" class="flex flex-wrap gap-2">
+              <UBadge
+                v-for="topic in repo.topics"
+                :key="topic"
+                color="primary"
+                variant="solid"
+                size="xs"
+                class="font-medium"
+              >
+                {{ topic }}
+              </UBadge>
+            </div>
+
+            <!-- Dates -->
+            <div class="flex items-center justify-between text-xs text-gray-700 dark:text-gray-200 pt-3 border-t border-gray-300 dark:border-gray-600">
+              <div class="flex items-center gap-1.5">
+                <UIcon name="i-heroicons-calendar" class="w-4 h-4" />
+                <span class="font-semibold">Created: {{ formatDate(repo.created_at as string) }}</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <UIcon name="i-heroicons-arrow-path" class="w-4 h-4" />
+                <span class="font-semibold">{{ formatDate(repo.updated_at as string) }}</span>
+              </div>
+            </div>
+          </div>
+
+          <template #footer>
+            <div class="flex items-center gap-2">
+              <UButton
+                v-if="repo.html_url"
+                :to="repo.html_url"
+                target="_blank"
+                color="gray"
+                variant="solid"
+                size="sm"
+                icon="i-simple-icons-github"
+                class="flex-1"
+              >
+                GitHub
+              </UButton>
+              <UButton
+                v-if="repo.homepage"
+                :to="repo.homepage"
+                target="_blank"
+                color="gray"
+                variant="solid"
+                size="sm"
+                icon="i-heroicons-arrow-top-right-on-square"
+                class="flex-1"
+              >
+                Website
+              </UButton>
+            </div>
+          </template>
+        </UCard>
+      </div>
+
+      <!-- Empty State -->
+      <div v-if="!repos || repos.length === 0" class="text-center py-16">
+        <div class="inline-block bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm px-8 py-6 rounded-2xl shadow-lg">
+          <UIcon name="i-heroicons-folder-open" class="w-20 h-20 mx-auto text-gray-600 dark:text-gray-300 mb-4" />
+          <p class="text-lg text-gray-900 dark:text-white font-semibold">No repositories found</p>
+        </div>
+      </div>
+    </UContainer>
   </div>
 </template>
 
@@ -71,39 +144,3 @@ function formatDate(inputDate: string): string {
 }
 </script>
 
-<style lang="css" scoped>  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-    color: #333333;
-  }
-
-  p {
-    font-size: 18px;
-    margin-bottom: 40px;
-    color: #666666;
-  }
-
-  .btn {
-    font-size: 20px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-  }
-
-
-  .btn-primary {
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
-  }
-
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
-</style>
