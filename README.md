@@ -28,7 +28,7 @@ A modern portfolio website showcasing open source projects from Mindfield and co
 ## 📋 Prerequisites
 
 - Node.js 18+ or 20+
-- npm, pnpm, yarn, or bun
+- npm (comes with Node.js)
 - GitHub Personal Access Token (for fetching repositories)
 
 ## 🛠️ Setup
@@ -44,12 +44,6 @@ cd www
 
 ```bash
 npm install
-# or
-pnpm install
-# or
-yarn install
-# or
-bun install
 ```
 
 3. **Configure environment variables**
@@ -72,12 +66,6 @@ Start the development server on `http://localhost:3000`:
 
 ```bash
 npm run dev
-# or
-pnpm run dev
-# or
-yarn dev
-# or
-bun run dev
 ```
 
 The application will automatically:
@@ -92,24 +80,12 @@ Build the application for production:
 
 ```bash
 npm run build
-# or
-pnpm run build
-# or
-yarn build
-# or
-bun run build
 ```
 
 Locally preview production build:
 
 ```bash
 npm run preview
-# or
-pnpm run preview
-# or
-yarn preview
-# or
-bun run preview
 ```
 
 ## 📦 Deployment
