@@ -1,9 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    modules: ['@nuxt/eslint'],
+    modules: ['@nuxt/eslint', '@nuxt/ui'],
     devtools: { enabled: true },
     telemetry: false,
     ssr: true,
+    vite: {
+      server: {
+        allowedHosts: ['.gitpod.dev', '.gitpod.io']
+      }
+    },
     runtimeConfig: {
       UNSPLASH_ACCESS_KEY: process.env.UNSPLASH_ACCESS_KEY,
       GITHUB_TOKEN: process.env.GITHUB_TOKEN
