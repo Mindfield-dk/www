@@ -27,7 +27,7 @@
     },
     "dependencies": {
         "@nuxt/ui": "^4.1.0",
-        "@octokit/rest": "^22.0.0",
+        "@octokit/rest": "^22.0.1",
         "unsplash-js": "^7.0.20"
     }
 }
