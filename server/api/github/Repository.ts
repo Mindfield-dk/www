@@ -139,4 +139,4 @@ interface Repository {
   security_and_analysis: SecurityAndAnalysis | null;
 }
 
-export default Repository
+export type { Repository as default }
