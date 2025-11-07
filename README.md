@@ -35,31 +35,31 @@ and Nuxt UI, featuring a beautiful card-based layout with dark mode support.
 
 1. **Clone the repository**
 
-```bash
-git clone https://github.com/Mindfield-dk/www.git
-cd www
-```
+   ```bash
+   git clone https://github.com/Mindfield-dk/www.git
+   cd www
+   ```
 
-1. **Install dependencies**
+2. **Install dependencies**
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
-1. **Configure environment variables**
+3. **Configure environment variables**
 
-Create a `.env` file in the root directory:
+   Create a `.env` file in the root directory:
 
-```env
-GITHUB_TOKEN=your_github_personal_access_token
-UNSPLASH_ACCESS_KEY=your_unsplash_access_key (optional)
-```
+   ```env
+   GITHUB_TOKEN=your_github_personal_access_token
+   UNSPLASH_ACCESS_KEY=your_unsplash_access_key (optional)
+   ```
 
-To get a GitHub token:
+      To get a GitHub token:
 
-- Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
-- Generate a new token with `public_repo` scope
-- Copy the token to your `.env` file
+   - Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
+   - Generate a new token with `public_repo` scope
+   - Copy the token to your `.env` file
 
 ## 💻 Development
 
