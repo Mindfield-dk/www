@@ -1,6 +1,7 @@
 # Mindfield Portfolio
 
-A modern portfolio website showcasing open source projects from Mindfield and contributors. Built with Nuxt 4 and Nuxt UI, featuring a beautiful card-based layout with dark mode support.
+A modern portfolio website showcasing open source projects from Mindfield and contributors. Built with Nuxt 4
+and Nuxt UI, featuring a beautiful card-based layout with dark mode support.
 
 ## 🌟 Features
 
@@ -18,7 +19,7 @@ A modern portfolio website showcasing open source projects from Mindfield and co
 - **UI Library:** [Nuxt UI v4](https://ui.nuxt.com/) - Fully styled and customizable components
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - **Icons:** [Heroicons](https://heroicons.com/) - Beautiful hand-crafted SVG icons
-- **API Integration:** 
+- **API Integration:**
   - [Octokit](https://github.com/octokit/rest.js) - GitHub REST API client
   - [Unsplash](https://unsplash.com/developers) - Photo API (optional)
 - **Deployment:** [Cloudflare Pages](https://pages.cloudflare.com/)
@@ -34,30 +35,31 @@ A modern portfolio website showcasing open source projects from Mindfield and co
 
 1. **Clone the repository**
 
-```bash
-git clone https://github.com/Mindfield-dk/www.git
-cd www
-```
+   ```bash
+   git clone https://github.com/Mindfield-dk/www.git
+   cd www
+   ```
 
 2. **Install dependencies**
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 3. **Configure environment variables**
 
-Create a `.env` file in the root directory:
+   Create a `.env` file in the root directory:
 
-```env
-GITHUB_TOKEN=your_github_personal_access_token
-UNSPLASH_ACCESS_KEY=your_unsplash_access_key (optional)
-```
+   ```env
+   GITHUB_TOKEN=your_github_personal_access_token
+   UNSPLASH_ACCESS_KEY=your_unsplash_access_key (optional)
+   ```
 
-To get a GitHub token:
-- Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
-- Generate a new token with `public_repo` scope
-- Copy the token to your `.env` file
+      To get a GitHub token:
+
+   - Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
+   - Generate a new token with `public_repo` scope
+   - Copy the token to your `.env` file
 
 ## 💻 Development
 
@@ -68,6 +70,7 @@ npm run dev
 ```
 
 The application will automatically:
+
 - Fetch repositories from the configured GitHub organization (`Mindfield-dk`)
 - Fetch repositories from the configured user (`localgod`)
 - Filter out archived repositories and those tagged with `personal`
@@ -105,6 +108,7 @@ The `nitro.preset` is set to `cloudflare_pages` in `nuxt.config.ts`.
 ### Changing Data Sources
 
 Edit `server/api/github/repos.ts` to modify:
+
 - GitHub organization: Change `'Mindfield-dk'` to your organization
 - GitHub user: Change `'localgod'` to your username
 - Filtering logic: Modify the filter function to include/exclude repositories
@@ -136,7 +140,7 @@ npm run lintfix
 
 ## 📁 Project Structure
 
-```
+```text
 .
 ├── app/
 │   ├── app.vue              # Root Vue component
