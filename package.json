@@ -18,7 +18,7 @@
         "@cloudflare/workers-types": "^4.20251117.0",
         "@nuxt/devtools": "latest",
         "@nuxt/eslint": "^1.10.0",
-        "@types/node": "^24.10.0",
+        "@types/node": "^24.10.1",
         "eslint": "^9.39.1",
         "markdownlint-cli": "^0.45.0",
         "nuxt": "^4.2.1",
