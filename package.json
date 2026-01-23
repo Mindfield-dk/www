@@ -15,7 +15,7 @@
         "mdlint": "markdownlint '**/*.md' --ignore node_modules --ignore .nuxt"
     },
     "devDependencies": {
-        "@cloudflare/workers-types": "^4.20260120.0",
+        "@cloudflare/workers-types": "^4.20260122.0",
         "@nuxt/devtools": "latest",
         "@nuxt/eslint": "^1.12.1",
         "@types/node": "^25.0.9",
