@@ -19,7 +19,7 @@
         "@nuxt/devtools": "latest",
         "@nuxt/eslint": "^1.15.2",
         "@types/node": "^25.5.0",
-        "eslint": "^10.0.3",
+        "eslint": "^10.1.0",
         "markdownlint-cli": "^0.48.0",
         "nuxt": "^4.4.2",
         "typescript": "^6.0.2",
