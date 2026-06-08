@@ -23,11 +23,11 @@
         "markdownlint-cli": "^0.48.0",
         "nuxt": "^4.4.6",
         "typescript": "^6.0.3",
-        "unsplash-js": "^7.0.20"
+        "unsplash-js": "^8.0.0"
     },
     "dependencies": {
         "@nuxt/ui": "^4.8.2",
         "@octokit/rest": "^22.0.1",
-        "unsplash-js": "^7.0.20"
+        "unsplash-js": "^8.0.0"
     }
 }
