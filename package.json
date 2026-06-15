@@ -2,7 +2,7 @@
     "name": "nuxt-app",
     "private": true,
     "engines": {
-        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+        "node": ">=24.11.0 <25"
     },
     "scripts": {
         "build": "nuxt build",
@@ -12,18 +12,18 @@
         "postinstall": "nuxt prepare",
         "lint": "eslint .",
         "lintfix": "eslint . --fix",
-        "mdlint": "markdownlint '**/*.md' --ignore node_modules --ignore .nuxt"
+        "mdlint": "markdownlint '**/*.md' --ignore node_modules --ignore .nuxt",
+        "check": "npm run lint && npm run mdlint && npx nuxi typecheck && npm run build"
     },
     "devDependencies": {
         "@cloudflare/workers-types": "^4.20260613.1",
-        "@nuxt/devtools": "latest",
+        "@nuxt/devtools": "^3.2.4",
         "@nuxt/eslint": "^1.16.0",
         "@types/node": "^25.9.2",
         "eslint": "^10.5.0",
         "markdownlint-cli": "^0.48.0",
         "nuxt": "^4.4.8",
-        "typescript": "^6.0.3",
-        "unsplash-js": "^7.0.20"
+        "typescript": "^6.0.3"
     },
     "dependencies": {
         "@nuxt/ui": "^4.8.2",

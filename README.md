@@ -27,7 +27,7 @@ and Nuxt UI, featuring a beautiful card-based layout with dark mode support.
 
 ## 📋 Prerequisites
 
-- Node.js 18+ or 20+
+- Node.js 24.11+
 - npm (comes with Node.js)
 - GitHub Personal Access Token (for fetching repositories)
 
@@ -125,6 +125,12 @@ Edit `server/api/github/repos.ts` to modify:
 - **Main Page:** `app/pages/index.vue`
 
 ## 🧪 Linting
+
+Run the full local check suite:
+
+```bash
+npm run check
+```
 
 Run ESLint to check code quality:
 
