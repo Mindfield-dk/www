@@ -15,8 +15,47 @@
         </div>
       </div>
 
+      <!-- Loading State -->
+      <div v-if="pending" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <UCard
+          v-for="index in 6"
+          :key="index"
+          class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm"
+        >
+          <template #header>
+            <USkeleton class="h-7 w-2/3" />
+          </template>
+
+          <div class="space-y-4">
+            <USkeleton class="h-4 w-full" />
+            <USkeleton class="h-4 w-5/6" />
+            <USkeleton class="h-4 w-1/2" />
+          </div>
+
+          <template #footer>
+            <USkeleton class="h-8 w-full" />
+          </template>
+        </UCard>
+      </div>
+
+      <!-- Error State -->
+      <div v-else-if="error" class="text-center py-16">
+        <div class="inline-block bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm px-8 py-6 rounded-2xl shadow-lg">
+          <UIcon name="i-heroicons-exclamation-triangle" class="w-20 h-20 mx-auto text-red-600 dark:text-red-400 mb-4" />
+          <p class="text-lg text-gray-900 dark:text-white font-semibold mb-4">Unable to load repositories</p>
+          <UButton
+            color="neutral"
+            variant="solid"
+            icon="i-heroicons-arrow-path"
+            @click="refresh()"
+          >
+            Retry
+          </UButton>
+        </div>
+      </div>
+
       <!-- Repository Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div v-else-if="repos?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <UCard
           v-for="repo in repos"
           :key="repo?.name"
@@ -99,7 +138,7 @@
       </div>
 
       <!-- Empty State -->
-      <div v-if="!repos || repos.length === 0" class="text-center py-16">
+      <div v-else class="text-center py-16">
         <div class="inline-block bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm px-8 py-6 rounded-2xl shadow-lg">
           <UIcon name="i-heroicons-folder-open" class="w-20 h-20 mx-auto text-gray-600 dark:text-gray-300 mb-4" />
           <p class="text-lg text-gray-900 dark:text-white font-semibold">No repositories found</p>
@@ -110,7 +149,17 @@
 </template>
 
 <script setup lang="ts">
-const { data: repos } = await useFetch('/api/github/repos')
+interface RepositorySummary {
+  name: string
+  description: string | null
+  topics: string[]
+  created_at: string | null
+  updated_at: string | null
+  html_url: string
+  homepage: string | null
+}
+
+const { data: repos, pending, error, refresh } = await useFetch<RepositorySummary[]>('/api/github/repos')
 
 /**
  * Capitalizes the first letter of a string.
@@ -118,7 +167,7 @@ const { data: repos } = await useFetch('/api/github/repos')
  * @param {string} str - The input string.
  * @return {string} The input string with the first letter capitalized.
  */
-function ucfirst(str: string): string {
+function ucfirst(str = ''): string {
   if (str.length === 0) {
     return str; // If the string is empty, return it as is
   } else {
@@ -132,8 +181,16 @@ function ucfirst(str: string): string {
  * @param {string} inputDate - The input date to be formatted.
  * @return {string} The formatted date in the format "DD/MM-YYYY".
  */
-function formatDate(inputDate: string): string {
+function formatDate(inputDate?: string | null): string {
+  if (!inputDate) {
+    return 'Unknown';
+  }
+
   const date = new Date(inputDate);
+
+  if (Number.isNaN(date.getTime())) {
+    return 'Unknown';
+  }
 
   const day = String(date.getUTCDate()).padStart(2, '0');
   const month = String(date.getUTCMonth() + 1).padStart(2, '0');
@@ -142,4 +199,3 @@ function formatDate(inputDate: string): string {
   return `${day}/${month}-${year}`;
 }
 </script>
-

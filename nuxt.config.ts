@@ -3,7 +3,7 @@ export default defineNuxtConfig({
     modules: ['@nuxt/eslint', '@nuxt/ui'],
     devtools: { enabled: true },
     telemetry: false,
-    compatibilityDate:"latest",
+    compatibilityDate: '2026-06-15',
     ssr: true,
     vite: {
       server: {
@@ -16,6 +16,9 @@ export default defineNuxtConfig({
     },
     nitro: {
       preset: "cloudflare_pages",
+      cloudflare: {
+        nodeCompat: true
+      },
       esbuild: {
         options: {
           target: 'esnext'

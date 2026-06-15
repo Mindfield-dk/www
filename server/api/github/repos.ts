@@ -1,5 +1,5 @@
 import { Octokit } from "@octokit/rest";
-import type Repository from "./Repository"
+import type Repository from "../../types/repository"
 
 class GitHubRepositories {
   private octokit;
@@ -19,12 +19,22 @@ class GitHubRepositories {
 
   async getAllNonArchivedRepositoriesForUser(username: string): Promise<Repository[]> {
     try {
-      const response = await this.octokit.repos.listForUser({
-        username,
-        per_page: 100
-      });
+      let repos: Repository[] = [];
+      let page = 1;
+      let response;
 
-      return (response.data as Repository[]).filter(repo => repo.archived === false)
+      do {
+        response = await this.octokit.repos.listForUser({
+          username,
+          per_page: 100,
+          page
+        });
+
+        repos = repos.concat(response.data as Repository[]);
+        page++;
+      } while (response.headers.link && response.headers.link.includes('rel="next"'));
+
+      return repos.filter(repo => repo.archived === false)
     } catch (error) {
       console.error('Error fetching repositories for user:', username, error);
       throw error;
@@ -57,13 +67,17 @@ class GitHubRepositories {
   }
 }
 
-export default defineEventHandler(async () => {
+export default defineCachedEventHandler(async () => {
   const gitHubRepositories = new GitHubRepositories();
   return (await gitHubRepositories.getAllRepositories()).filter((repo) => {
-    return !repo.topics.includes('personal')
+    return !repo.topics?.includes('personal')
   } ).sort((a: Repository, b: Repository) => {
     const dateA: Date = new Date(a.created_at as string);
     const dateB: Date = new Date(b.created_at as string);
     return dateB.getTime() - dateA.getTime();
 })
+}, {
+  maxAge: 300,
+  name: 'github-repositories',
+  swr: true
 });
