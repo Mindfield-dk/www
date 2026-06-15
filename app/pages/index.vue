@@ -1,15 +1,15 @@
 <template>
   <div class="min-h-screen">
     <MainNavigation />
-    
+
     <UContainer class="py-8 sm:py-12">
       <!-- Header Section with backdrop -->
       <div class="mb-10 text-center">
-        <div class="inline-block bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm px-8 py-6 rounded-2xl shadow-lg">
-          <h1 class="text-4xl sm:text-5xl font-bold text-[#000000] dark:!text-white mb-3">
+        <div class="inline-block bg-elevated/95 backdrop-blur-sm px-8 py-6 rounded-lg shadow-lg ring ring-default">
+          <h1 class="text-4xl sm:text-5xl font-bold text-highlighted mb-3">
             Our Projects
           </h1>
-          <p class="text-lg text-gray-800 dark:text-gray-100 max-w-2xl">
+          <p class="text-lg text-toned max-w-2xl">
             Explore our open source repositories and contributions
           </p>
         </div>
@@ -20,7 +20,8 @@
         <UCard
           v-for="index in 6"
           :key="index"
-          class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm"
+          variant="subtle"
+          class="backdrop-blur-sm"
         >
           <template #header>
             <USkeleton class="h-7 w-2/3" />
@@ -40,18 +41,22 @@
 
       <!-- Error State -->
       <div v-else-if="error" class="text-center py-16">
-        <div class="inline-block bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm px-8 py-6 rounded-2xl shadow-lg">
-          <UIcon name="i-heroicons-exclamation-triangle" class="w-20 h-20 mx-auto text-red-600 dark:text-red-400 mb-4" />
-          <p class="text-lg text-gray-900 dark:text-white font-semibold mb-4">Unable to load repositories</p>
-          <UButton
-            color="neutral"
-            variant="solid"
-            icon="i-heroicons-arrow-path"
-            @click="refresh()"
-          >
-            Retry
-          </UButton>
-        </div>
+        <UAlert
+          color="error"
+          variant="soft"
+          orientation="vertical"
+          icon="i-lucide-triangle-alert"
+          title="Unable to load repositories"
+          description="The repository list could not be fetched right now."
+          class="mx-auto max-w-md text-start"
+          :actions="[{
+            label: 'Retry',
+            color: 'error',
+            variant: 'outline',
+            icon: 'i-lucide-refresh-cw',
+            onClick: () => refresh()
+          }]"
+        />
       </div>
 
       <!-- Repository Grid -->
@@ -59,23 +64,24 @@
         <UCard
           v-for="repo in repos"
           :key="repo?.name"
-          class="hover:shadow-2xl transition-all duration-200 hover:scale-[1.02] bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm"
+          variant="subtle"
+          class="hover:shadow-2xl transition-all duration-200 hover:scale-[1.02] backdrop-blur-sm"
         >
           <template #header>
             <div class="flex items-start justify-between gap-3">
-              <h3 class="text-xl font-bold text-[#000000] dark:!text-white truncate">
+              <h3 class="text-xl font-bold text-highlighted truncate">
                 {{ ucfirst(repo?.name) }}
               </h3>
-              <UIcon 
-                name="i-heroicons-code-bracket-square" 
-                class="w-6 h-6 text-primary-600 dark:text-primary-400 flex-shrink-0"
+              <UIcon
+                name="i-lucide-square-code"
+                class="size-6 text-primary flex-shrink-0"
               />
             </div>
           </template>
 
           <div class="space-y-4">
             <!-- Description -->
-            <p class="text-gray-800 dark:text-gray-100 text-sm leading-relaxed line-clamp-3 min-h-[3.75rem]">
+            <p class="text-toned text-sm leading-relaxed line-clamp-3 min-h-[3.75rem]">
               {{ repo?.description || 'No description available' }}
             </p>
 
@@ -85,7 +91,7 @@
                 v-for="topic in repo.topics"
                 :key="topic"
                 color="primary"
-                variant="solid"
+                variant="soft"
                 size="xs"
                 class="font-medium"
               >
@@ -94,13 +100,13 @@
             </div>
 
             <!-- Dates -->
-            <div class="flex items-center justify-between text-xs text-gray-700 dark:text-gray-200 pt-3 border-t border-gray-300 dark:border-gray-600">
+            <div class="flex items-center justify-between text-xs text-muted pt-3 border-t border-muted">
               <div class="flex items-center gap-1.5">
-                <UIcon name="i-heroicons-calendar" class="w-4 h-4" />
+                <UIcon name="i-lucide-calendar" class="size-4" />
                 <span class="font-semibold">Created: {{ formatDate(repo.created_at as string) }}</span>
               </div>
               <div class="flex items-center gap-1.5">
-                <UIcon name="i-heroicons-arrow-path" class="w-4 h-4" />
+                <UIcon name="i-lucide-refresh-cw" class="size-4" />
                 <span class="font-semibold">{{ formatDate(repo.updated_at as string) }}</span>
               </div>
             </div>
@@ -113,7 +119,7 @@
                 :to="repo.html_url"
                 target="_blank"
                 color="neutral"
-                variant="solid"
+                variant="outline"
                 size="sm"
                 icon="i-simple-icons-github"
                 class="flex-1"
@@ -125,9 +131,9 @@
                 :to="repo.homepage"
                 target="_blank"
                 color="neutral"
-                variant="solid"
+                variant="outline"
                 size="sm"
-                icon="i-heroicons-arrow-top-right-on-square"
+                icon="i-lucide-external-link"
                 class="flex-1"
               >
                 Website
@@ -139,10 +145,12 @@
 
       <!-- Empty State -->
       <div v-else class="text-center py-16">
-        <div class="inline-block bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm px-8 py-6 rounded-2xl shadow-lg">
-          <UIcon name="i-heroicons-folder-open" class="w-20 h-20 mx-auto text-gray-600 dark:text-gray-300 mb-4" />
-          <p class="text-lg text-gray-900 dark:text-white font-semibold">No repositories found</p>
-        </div>
+        <UEmpty
+          icon="i-lucide-folder-open"
+          title="No repositories found"
+          variant="subtle"
+          class="mx-auto max-w-md backdrop-blur-sm"
+        />
       </div>
     </UContainer>
   </div>
