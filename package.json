@@ -23,7 +23,7 @@
         "eslint": "^10.6.0",
         "markdownlint-cli": "^0.49.0",
         "nuxt": "^4.4.8",
-        "typescript": "^6.0.3"
+        "typescript": "^7.0.2"
     },
     "dependencies": {
         "@nuxt/ui": "^4.9.0",
