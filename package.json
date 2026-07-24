@@ -16,7 +16,7 @@
         "check": "npm run lint && npm run mdlint && npx nuxi typecheck && npm run build"
     },
     "devDependencies": {
-        "@cloudflare/workers-types": "^5.20260721.1",
+        "@cloudflare/workers-types": "^5.20260723.1",
         "@nuxt/devtools": "^3.2.4",
         "@nuxt/eslint": "^1.16.0",
         "@types/node": "^26.1.1",
