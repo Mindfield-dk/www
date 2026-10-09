@@ -1,18 +1,35 @@
+import type { NitroConfig } from 'nitropack/types'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     modules: ['@nuxt/eslint', '@nuxt/ui'],
     devtools: { enabled: true },
     telemetry: false,
     compatibilityDate: '2026-06-15',
+    future: {
+      compatibilityVersion: 5
+    },
+    experimental: {
+      routeTypedFetch: true,
+      strictRouteTypes: true
+    },
+    ui: {
+      experimental: {
+        componentDetection: true
+      }
+    },
     ssr: true,
+    server: {
+      builder: 'nitro'
+    },
     vite: {
       server: {
         allowedHosts: ['.gitpod.dev', '.gitpod.io']
       }
     },
     runtimeConfig: {
-      UNSPLASH_ACCESS_KEY: process.env.UNSPLASH_ACCESS_KEY,
-      GITHUB_TOKEN: process.env.GITHUB_TOKEN
+      unsplashAccessKey: '',
+      githubToken: ''
     },
     nitro: {
       preset: "cloudflare_pages",
@@ -24,7 +41,7 @@ export default defineNuxtConfig({
           target: 'esnext'
         }
       }
-    },
+    } as NitroConfig,
     css: [
         '~/assets/css/main.css',
     ]

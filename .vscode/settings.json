@@ -1,0 +1,15 @@
+{
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.classAttributes": [
+    "class",
+    "ui"
+  ],
+  "tailwindCSS.classFunctions": [
+    "defineAppConfig"
+  ]
+}

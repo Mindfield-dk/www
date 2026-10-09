@@ -1,13 +1,24 @@
 import { Octokit } from "@octokit/rest";
+import { defineCachedFunction } from 'nitropack/runtime'
+import { defineEventHandler, useRuntimeConfig } from 'nuxt/server'
 import type Repository from "../../types/repository"
+
+type RepositorySummary = Pick<Repository,
+  | 'name'
+  | 'description'
+  | 'topics'
+  | 'created_at'
+  | 'updated_at'
+  | 'html_url'
+  | 'homepage'
+>
 
 class GitHubRepositories {
   private octokit;
 
-  constructor() {
-    const { GITHUB_TOKEN } = useRuntimeConfig();
+  constructor(githubToken: string) {
     this.octokit = new Octokit({
-      auth: GITHUB_TOKEN,
+      auth: githubToken || undefined,
     });
   }
 
@@ -67,17 +78,31 @@ class GitHubRepositories {
   }
 }
 
-export default defineCachedEventHandler(async () => {
-  const gitHubRepositories = new GitHubRepositories();
+const getRepositories = defineCachedFunction(async (githubToken: string): Promise<RepositorySummary[]> => {
+  const gitHubRepositories = new GitHubRepositories(githubToken);
   return (await gitHubRepositories.getAllRepositories()).filter((repo) => {
     return !repo.topics?.includes('personal')
   } ).sort((a: Repository, b: Repository) => {
     const dateA: Date = new Date(a.created_at as string);
     const dateB: Date = new Date(b.created_at as string);
     return dateB.getTime() - dateA.getTime();
-})
+  }).map(repo => ({
+    name: repo.name,
+    description: repo.description,
+    topics: repo.topics,
+    created_at: repo.created_at,
+    updated_at: repo.updated_at,
+    html_url: repo.html_url,
+    homepage: repo.homepage
+  }))
 }, {
+  getKey: () => 'all',
   maxAge: 300,
   name: 'github-repositories',
   swr: true
 });
+
+export default defineEventHandler(() => {
+  const { githubToken } = useRuntimeConfig()
+  return getRepositories(githubToken)
+})
