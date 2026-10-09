@@ -1,7 +1,13 @@
 <template>
   <UApp>
-    <NuxtLayout>
+    <UHeader title="Mindfield" to="/" :toggle="false">
+      <template #right>
+        <UColorModeButton />
+      </template>
+    </UHeader>
+
+    <UMain>
       <NuxtPage />
-    </NuxtLayout>
+    </UMain>
   </UApp>
 </template>

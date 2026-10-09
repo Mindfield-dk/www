@@ -51,8 +51,8 @@ and Nuxt UI, featuring a beautiful card-based layout with dark mode support.
    Create a `.env` file in the root directory:
 
    ```env
-   GITHUB_TOKEN=your_github_personal_access_token
-   UNSPLASH_ACCESS_KEY=your_unsplash_access_key (optional)
+   NUXT_GITHUB_TOKEN=your_github_personal_access_token
+   NUXT_UNSPLASH_ACCESS_KEY=your_unsplash_access_key (optional)
    ```
 
       To get a GitHub token:
@@ -98,8 +98,8 @@ This project is configured for deployment on Cloudflare Pages:
 2. Set the build command: `npm run build`
 3. Set the build output directory: `dist`
 4. Add environment variables in Cloudflare Pages settings:
-   - `GITHUB_TOKEN`
-   - `UNSPLASH_ACCESS_KEY` (if used)
+   - `NUXT_GITHUB_TOKEN`
+   - `NUXT_UNSPLASH_ACCESS_KEY` (if used)
 
 The `nitro.preset` is set to `cloudflare_pages` in `nuxt.config.ts`.
 

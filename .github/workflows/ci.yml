@@ -9,14 +9,17 @@ on:
       - '**'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 # Cancel in-progress runs for the same workflow
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  lint:
-    name: 🔍 Lint Code
+  check:
+    name: 🔍 Check and Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -25,83 +28,25 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24'
+          node-version: '24.15.0'
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run ESLint
-        run: npm run lint
-
-  mdlint:
-    name: 📝 Lint Markdown
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version: '24'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run Markdownlint
-        run: npm run mdlint
-
-  typecheck:
-    name: 🔎 Type Check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version: '24'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run type check
-        run: npx nuxi typecheck
-
-  build:
-    name: 🏗️ Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version: '24'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build application
-        run: npm run build
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run checks
+        run: npm run check
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v7
         with:
           name: dist
-          path: .output
+          path: dist
+          if-no-files-found: error
           retention-days: 7
 
   security:
-    name: 🔒 Security Audit
+    name: 🔒 Production Dependency Audit
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -110,9 +55,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24'
-          cache: 'npm'
+          node-version: '24.15.0'
+          package-manager-cache: false
 
-      - name: Run npm audit
-        run: npm audit --audit-level=moderate
-        continue-on-error: true
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=moderate
