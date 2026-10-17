@@ -26,7 +26,7 @@
         "nitropack": "^2.13.4",
         "nuxt": "^4.6.1",
         "typescript": "^7.0.2",
-        "vue-tsc": "^3.3.12"
+        "vue-tsc": "^3.3.13"
     },
     "dependencies": {
         "@iconify-json/lucide": "^1.2.143",
