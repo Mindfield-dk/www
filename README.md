@@ -1,6 +1,6 @@
 # Mindfield Portfolio
 
-A modern portfolio website showcasing open source projects from Mindfield and contributors. Built with Nuxt 4
+A portfolio website showcasing open source projects from Mindfield and contributors. Built with Nuxt 4
 and Nuxt UI, featuring a beautiful card-based layout with dark mode support.
 
 ## 🌟 Features
