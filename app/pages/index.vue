@@ -1,16 +1,8 @@
 <template>
   <UPage>
     <UPageHero
-      title="Open source from Mindfield"
-      description="We build open source tools for enterprise architecture, diagramming and developer workflows."
-      :links="[{
-        label: 'Follow on GitHub',
-        to: 'https://github.com/Mindfield-dk',
-        target: '_blank',
-        rel: 'noopener noreferrer',
-        icon: 'i-simple-icons-github',
-        size: 'lg'
-      }]"
+      title="Our Projects"
+      description="Open source projects from Mindfield and its contributors."
       :ui="{ container: 'py-16 sm:py-20 lg:py-24', description: 'text-default' }"
     />
 
@@ -58,7 +50,7 @@
         <UPageCard
           v-for="repo in repos"
           :key="repo.name"
-          :title="repo.name"
+          :title="repo.full_name || repo.name"
           :to="repo.html_url"
           target="_blank"
           icon="i-lucide-square-code"
@@ -70,6 +62,10 @@
             footer: 'w-full'
           }"
         >
+          <template #title>
+            <span v-if="repo.full_name" class="font-normal text-muted">{{ repo.full_name.split('/')[0] }}/</span>{{ repo.name }}
+          </template>
+
           <template #description>
             <p>{{ repo.description }}</p>
             <div v-if="repo.topics?.length" class="mt-3 flex flex-wrap gap-1.5">

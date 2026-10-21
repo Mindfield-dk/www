@@ -7,17 +7,14 @@
 
       <template #right>
         <UColorModeButton />
-        <UTooltip text="Mindfield on GitHub">
+        <UDropdownMenu :items="githubMenu" :content="{ align: 'end' }">
           <UButton
-            to="https://github.com/Mindfield-dk"
-            target="_blank"
-            rel="noopener noreferrer"
             icon="i-simple-icons-github"
             color="neutral"
             variant="ghost"
-            aria-label="Mindfield on GitHub"
+            aria-label="GitHub accounts"
           />
-        </UTooltip>
+        </UDropdownMenu>
       </template>
     </UHeader>
 
@@ -41,13 +38,16 @@
 
       <template #right>
         <UButton
-          to="https://github.com/Mindfield-dk"
+          v-for="account in githubAccounts"
+          :key="account.login"
+          :to="account.to"
+          :label="account.login"
           target="_blank"
           rel="noopener noreferrer"
           icon="i-simple-icons-github"
           color="neutral"
           variant="ghost"
-          aria-label="Mindfield on GitHub"
+          size="sm"
         />
       </template>
     </UFooter>
@@ -56,10 +56,23 @@
 
 <script setup lang="ts">
 const year = new Date().getFullYear()
+
+// The listed repositories come from both of these accounts (see server/api/github/repos.ts)
+const githubAccounts = [
+  { login: 'Mindfield-dk', to: 'https://github.com/Mindfield-dk' },
+  { login: 'localgod', to: 'https://github.com/localgod' }
+]
+
+const githubMenu = githubAccounts.map(account => ({
+  label: account.login,
+  icon: 'i-simple-icons-github',
+  to: account.to,
+  target: '_blank'
+}))
 const url = useRequestURL()
 
-const title = 'Mindfield – Open source projects'
-const description = 'Open source tools from Mindfield for enterprise architecture, diagramming and developer workflows.'
+const title = 'Mindfield – Our Projects'
+const description = 'Open source projects from Mindfield and its contributors.'
 
 useHead({
   htmlAttrs: { lang: 'en' },

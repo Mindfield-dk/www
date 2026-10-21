@@ -5,6 +5,7 @@ import type Repository from "../../types/repository"
 
 type RepositorySummary = Pick<Repository,
   | 'name'
+  | 'full_name'
   | 'description'
   | 'topics'
   | 'created_at'
@@ -91,6 +92,7 @@ const getRepositories = defineCachedFunction(async (githubToken: string): Promis
     return dateB.getTime() - dateA.getTime();
   }).map(repo => ({
     name: repo.name,
+    full_name: repo.full_name,
     description: repo.description,
     topics: repo.topics,
     created_at: repo.created_at,
