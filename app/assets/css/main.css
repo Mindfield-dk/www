@@ -1,10 +1,41 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
-body {
-  /* Tint the photo with the theme background so text stays readable in both color modes */
-  background-image: linear-gradient(color-mix(in oklab, var(--ui-bg) 45%, transparent), color-mix(in oklab, var(--ui-bg) 45%, transparent)), url("https://images.unsplash.com/photo-1692641995795-59026e35e458?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDc2MDF8MHwxfGFsbHx8fHx8fHx8fDE3MDQxOTk2Mjh8&ixlib=rb-4.0.3&q=80&w=1080");
-  background-repeat: no-repeat;
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/*
+ * Background photo on a fixed pseudo-element instead of `background-attachment: fixed`,
+ * which iOS Safari ignores (it would stretch the photo over the whole document).
+ * The gradient tints the photo with the theme background so text stays readable in both
+ * color modes, getting stronger towards the bottom where the cards sit.
+ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--ui-bg) 55%, transparent),
+      color-mix(in oklab, var(--ui-bg) 75%, transparent)
+    ),
+    url('/images/background-sm.webp');
+  background-position: center;
   background-size: cover;
-  background-attachment: fixed;
+}
+
+@media (min-width: 768px) {
+  body::before {
+    background-image:
+      linear-gradient(
+        to bottom,
+        color-mix(in oklab, var(--ui-bg) 55%, transparent),
+        color-mix(in oklab, var(--ui-bg) 75%, transparent)
+      ),
+      url('/images/background.webp');
+  }
 }
