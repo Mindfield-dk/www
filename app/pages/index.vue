@@ -3,6 +3,7 @@
     <UPageHero
       title="Our Projects"
       description="Explore our open source repositories and contributions"
+      :ui="{ description: 'text-toned' }"
     />
 
     <UPageSection
@@ -40,9 +41,10 @@
           :description="repo.description || 'No description available'"
           icon="i-lucide-square-code"
           variant="subtle"
+          :ui="{ root: 'bg-default/80 backdrop-blur-md', footer: 'w-full' }"
         >
           <template #footer>
-            <UPageList divide>
+            <UPageList divide class="*:py-3">
               <UPageFeature
                 v-if="repo.topics?.length"
                 title="Topics"

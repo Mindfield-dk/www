@@ -1,4 +1,3 @@
-import type { NitroConfig } from 'nitropack/types'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -41,7 +40,7 @@ export default defineNuxtConfig({
           target: 'esnext'
         }
       }
-    } as NitroConfig,
+    },
     css: [
         '~/assets/css/main.css',
     ]
