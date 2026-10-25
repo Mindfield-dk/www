@@ -35,6 +35,20 @@ export default defineNuxtConfig({
       cloudflare: {
         nodeCompat: true
       },
+      // Persist cached function results (e.g. the GitHub repository list) in Cloudflare KV so the
+      // cache is shared between Worker isolates and survives restarts. Requires a KV namespace bound
+      // as `CACHE` on the Pages project (Settings → Bindings).
+      storage: {
+        cache: {
+          driver: 'cloudflare-kv-binding',
+          binding: 'CACHE'
+        }
+      },
+      devStorage: {
+        cache: {
+          driver: 'memory'
+        }
+      },
       esbuild: {
         options: {
           target: 'esnext'
