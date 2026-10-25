@@ -1,6 +1,6 @@
 import { Octokit } from "@octokit/rest";
 import { defineCachedFunction } from 'nitropack/runtime'
-import { defineEventHandler, useRuntimeConfig } from 'nuxt/server'
+import { defineEventHandler, useRuntimeConfig, type RequestEvent } from 'nuxt/server'
 import type Repository from "../../types/repository"
 
 type RepositorySummary = Pick<Repository,
@@ -81,7 +81,10 @@ class GitHubRepositories {
   }
 }
 
-const getRepositories = defineCachedFunction(async (githubToken: string): Promise<RepositorySummary[]> => {
+// The event is passed so Nitro can use waitUntil() to finish background revalidation on Cloudflare.
+// With swr enabled, a failed refresh (e.g. GitHub rate limiting) keeps serving the last good result.
+const getRepositories = defineCachedFunction(async (_event: RequestEvent): Promise<RepositorySummary[]> => {
+  const { githubToken } = useRuntimeConfig()
   const gitHubRepositories = new GitHubRepositories(githubToken);
   return (await gitHubRepositories.getAllRepositories()).filter((repo) => {
     // Repositories without a description are skipped as there is nothing meaningful to show for them
@@ -104,12 +107,9 @@ const getRepositories = defineCachedFunction(async (githubToken: string): Promis
   }))
 }, {
   getKey: () => 'all',
-  maxAge: 300,
+  maxAge: 3600,
   name: 'github-repositories',
   swr: true
 });
 
-export default defineEventHandler(() => {
-  const { githubToken } = useRuntimeConfig()
-  return getRepositories(githubToken)
-})
+export default defineEventHandler((event) => getRepositories(event))
