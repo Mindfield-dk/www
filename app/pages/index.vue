@@ -6,6 +6,106 @@
       :ui="{ container: 'py-16 sm:py-20 lg:py-24', description: 'text-default' }"
     />
 
+    <UPageSection v-if="showDemos" :ui="{ container: 'pt-0 sm:pt-0 lg:pt-0 pb-12 sm:pb-16 lg:pb-20' }">
+      <div>
+      <h2 class="mb-8 flex items-center gap-2 text-xl font-semibold text-highlighted">
+        <span class="relative flex size-2.5">
+          <span class="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-75" />
+          <span class="relative inline-flex size-2.5 rounded-full bg-primary" />
+        </span>
+        Live demos
+      </h2>
+
+      <UPageGrid class="lg:grid-cols-2">
+        <UPageCard
+          v-for="demo in demos"
+          :key="demo.url"
+          :to="demo.url"
+          target="_blank"
+          variant="subtle"
+          :ui="{
+            root: 'bg-default/90 backdrop-blur-md overflow-hidden transition-colors hover:ring-primary/50',
+            container: 'p-0 sm:p-0 gap-0',
+            body: 'w-full',
+            footer: 'w-full'
+          }"
+        >
+          <template #header>
+            <!-- Browser window chrome, so demos read as websites rather than repositories -->
+            <div class="flex w-full items-center gap-3 border-b border-default bg-elevated/60 px-4 py-2.5">
+              <div class="flex gap-1.5">
+                <span class="size-2.5 rounded-full bg-error/70" />
+                <span class="size-2.5 rounded-full bg-warning/70" />
+                <span class="size-2.5 rounded-full bg-success/70" />
+              </div>
+              <div class="flex min-w-0 flex-1 items-center gap-1.5 rounded-md bg-default px-2.5 py-1 font-mono text-xs text-muted ring ring-default">
+                <UIcon name="i-lucide-lock" class="size-3 shrink-0" />
+                <span class="truncate">{{ hostname(demo.url) }}</span>
+              </div>
+            </div>
+          </template>
+
+          <template #body>
+            <div class="space-y-3 px-4 pt-4 sm:px-6 sm:pt-5">
+              <div class="flex items-center justify-between gap-3">
+                <h3 class="flex items-center gap-2 text-base font-semibold text-highlighted">
+                  <UIcon name="i-lucide-globe" class="size-5 text-primary" />
+                  {{ demo.name }}
+                </h3>
+                <UBadge label="Live" color="primary" variant="soft" size="sm" icon="i-lucide-radio" />
+              </div>
+              <p class="text-toned">
+                {{ demo.description }}
+              </p>
+              <div v-if="demo.tags?.length" class="flex flex-wrap gap-1.5">
+                <UBadge
+                  v-for="tag in demo.tags"
+                  :key="tag"
+                  :label="tag"
+                  color="neutral"
+                  variant="soft"
+                  size="sm"
+                />
+              </div>
+            </div>
+          </template>
+
+          <template #footer>
+            <div class="flex items-center gap-2 px-4 pt-4 pb-4 sm:px-6 sm:pb-5">
+              <UButton
+                label="Visit site"
+                trailing-icon="i-lucide-arrow-up-right"
+                color="primary"
+                size="sm"
+                tabindex="-1"
+                aria-hidden="true"
+              />
+              <!-- Raised above the card's full-size link overlay so it stays clickable -->
+              <UButton
+                v-if="demo.repo"
+                :to="demo.repo"
+                target="_blank"
+                rel="noopener noreferrer"
+                label="Source"
+                icon="i-lucide-square-code"
+                color="neutral"
+                variant="outline"
+                size="sm"
+                class="relative z-[1]"
+              />
+            </div>
+          </template>
+        </UPageCard>
+      </UPageGrid>
+      </div>
+    </UPageSection>
+
+    <UContainer v-if="showDemos">
+      <h2 class="mb-8 text-xl font-semibold text-highlighted">
+        Repositories
+      </h2>
+    </UContainer>
+
     <UPageSection v-if="pending" :ui="{ container: 'pt-0 sm:pt-0 lg:pt-0' }">
       <UPageGrid>
         <UPageCard
@@ -127,5 +227,12 @@
 </template>
 
 <script setup lang="ts">
+import { demos } from '~/data/demos'
+
+// Live demos section is disabled for now; set to true to show it
+const showDemos = false
+
 const { data: repos, pending, error, refresh } = await useFetch('/api/github/repos')
+
+const hostname = (url: string) => new URL(url).hostname
 </script>
