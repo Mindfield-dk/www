@@ -20,7 +20,7 @@
         "@cloudflare/workers-types": "^5.20261024.1",
         "@nuxt/devtools": "^3.4.3",
         "@nuxt/eslint": "^1.17.0",
-        "@types/node": "^26.6.5",
+        "@types/node": "^26.6.6",
         "eslint": "^10.13.0",
         "markdownlint-cli": "^0.50.0",
         "nitropack": "^2.13.4",
