@@ -23,7 +23,7 @@
         "@types/node": "^26.6.6",
         "eslint": "^10.14.0",
         "markdownlint-cli": "^0.50.0",
-        "nitropack": "^2.13.4",
+        "nitropack": "^2.13.6",
         "nuxt": "^4.6.3",
         "typescript": "^6.0.3",
         "vue-tsc": "^3.3.14"
