@@ -82,6 +82,16 @@
               />
               <!-- Raised above the card's full-size link overlay so it stays clickable -->
               <UButton
+                v-if="demo.download"
+                :to="demo.download"
+                label="Download"
+                icon="i-lucide-download"
+                color="neutral"
+                variant="outline"
+                size="sm"
+                class="relative z-[1]"
+              />
+              <UButton
                 v-if="demo.repo"
                 :to="demo.repo"
                 target="_blank"
