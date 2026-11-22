@@ -5,6 +5,8 @@ export interface Demo {
   tags?: string[]
   // Public GitHub repository, shown as a secondary "Source" link
   repo?: string
+  // A page on this site with desktop downloads, shown as a secondary "Download" link
+  download?: string
 }
 
 export const demos: Demo[] = [
@@ -12,7 +14,8 @@ export const demos: Demo[] = [
     name: 'ModelForge',
     url: 'https://modelforge.mindfield.dk/',
     description: 'A lightweight, scriptable modeling tool for creating and managing enterprise architecture diagrams. Fully compatible with ArchiMate standards.',
-    tags: ['archimate']
+    tags: ['archimate'],
+    download: '/modelforge'
   },
   {
     name: 'Polaris',

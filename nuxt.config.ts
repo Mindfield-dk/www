@@ -28,7 +28,9 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
       unsplashAccessKey: '',
-      githubToken: ''
+      githubToken: '',
+      // Where ModelForge's desktop packages and their latest.json are (NUXT_MODELFORGE_DOWNLOADS overrides it)
+      modelforgeDownloads: 'https://downloads.mindfield.dk/modelforge'
     },
     nitro: {
       preset: "cloudflare_pages",

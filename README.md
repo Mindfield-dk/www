@@ -174,6 +174,8 @@ Key configuration in `nuxt.config.ts`:
 - **Modules:** `@nuxt/eslint`, `@nuxt/ui`
 - **SSR:** Enabled
 - **Deployment:** Cloudflare Pages preset
+- **ModelForge downloads:** `/modelforge` lists the desktop packages from `latest.json` at
+  `runtimeConfig.modelforgeDownloads` (`NUXT_MODELFORGE_DOWNLOADS` overrides it), cached for five minutes
 - **Dev Server:** Configured for Gitpod preview URLs
 
 ## 🤝 Contributing
