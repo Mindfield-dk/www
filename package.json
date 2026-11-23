@@ -29,7 +29,7 @@
         "vue-tsc": "^3.3.14"
     },
     "dependencies": {
-        "@iconify-json/lucide": "^1.2.155",
+        "@iconify-json/lucide": "^1.2.157",
         "@iconify-json/simple-icons": "^1.2.102",
         "@nuxt/ui": "^4.13.0",
         "@octokit/rest": "^22.0.1",
