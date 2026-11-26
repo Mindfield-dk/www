@@ -34,5 +34,8 @@
         "@nuxt/ui": "^4.13.0",
         "@octokit/rest": "^22.0.1",
         "unsplash-js": "^8.0.1"
+    },
+    "overrides": {
+        "readdir-glob": "^4.0.0"
     }
 }
