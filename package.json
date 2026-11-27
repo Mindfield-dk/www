@@ -31,7 +31,7 @@
     "dependencies": {
         "@iconify-json/lucide": "^1.2.158",
         "@iconify-json/simple-icons": "^1.2.103",
-        "@nuxt/ui": "^4.13.0",
+        "@nuxt/ui": "^4.13.1",
         "@octokit/rest": "^22.0.1",
         "unsplash-js": "^8.0.1"
     },
